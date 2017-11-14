@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/14 16:08:21 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/14 16:56:20 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ static size_t	count_hashtag_with_neighbour(char **allpieces, unsigned int y)
 		{
 			ret++;
 			if (!has_piece_neighbour(allpieces, x, y))
-			{
-				printf("no neighbour x = %i y = %i\n", x, y);
 				return (0);
-			}
 		}
 		x++;
 	}
