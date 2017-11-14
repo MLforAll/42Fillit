@@ -1,6 +1,6 @@
 # 42Fillit
+42 school's Fillit project (2nd real project)
 
-This is 42 school's Fillit project (2nd real project)
 The goal is to form the smallest square possible using up-to 26 trtriminos
 (provided in a file), in the shortest time possible.
 
