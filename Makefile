@@ -6,16 +6,15 @@
 #    By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 20:07:31 by kdumarai          #+#    #+#              #
-#    Updated: 2017/11/14 15:55:25 by kdumarai         ###   ########.fr        #
+#    Updated: 2017/11/16 16:42:53 by kdumarai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-GFLAGS = -Wall -Werror -Wextra
-
 SRCS = fillit_main.c \
-		fillit_analysis.c
+		fillit_analysis.c \
+		fillit_solver.c
 
 OBJS = $(SRCS:%.c=%.o)
 

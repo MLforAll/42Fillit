@@ -6,13 +6,13 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/14 16:56:20 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/16 17:39:48 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		has_piece_neighbour(char **allpieces, unsigned int x, int y)
+static int		has_piece_neighbour(char **allpieces, int x, int y)
 {
 	int		checks[4];
 
@@ -23,7 +23,7 @@ static int		has_piece_neighbour(char **allpieces, unsigned int x, int y)
 	return ((checks[0] || checks[1] || checks[2] || checks[3]));
 }
 
-static size_t	count_hashtag_with_neighbour(char **allpieces, unsigned int y)
+static size_t	count_hashtag_with_neighbour(char **allpieces, int y)
 {
 	int		x;
 	int		ret;

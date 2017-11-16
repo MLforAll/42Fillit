@@ -12,3 +12,4 @@ samples/valid_piece_3.fillit
 samples/valid_piece_square_1.fillit
 gen_upfiles.sh
 upfiles_fillit
+backups/chartabmethod.tar
