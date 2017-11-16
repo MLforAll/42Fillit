@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/16 19:20:47 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/16 21:52:44 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		run_fillit(int fd)
 	cntpieces = count_pieces(allpieces);
 	if (!cntpieces)
 		return (0);
-	printf("pieces = %li\n", cntpieces);
+	printf("pieces = %li\n\n", cntpieces);
 
 	/*char *test[4] = {".##.", "##..", "....", "...."};
 	int i = 0, p = 0;
@@ -37,9 +37,14 @@ static int		run_fillit(int fd)
 		i = (i == 3) ? 0 : i + 1;
 	}*/
 
+	printf("Solving puzzle... Please wait till year 3000 :D\n");
 	board = ft_strsplit("....|....|....|....", '|');
-	if (!solve_fillit(allpieces, board))
+	board = solve_fillit(allpieces, board, 4);
+	printf("\nDone!, Printing now...\n\n");
+	if (!board)
 		return(0);
+	ft_puttab(board, NULL);
+	ft_tabfree(&board);
 	return (1);
 }
 
