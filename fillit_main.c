@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/16 22:12:15 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/17 21:26:13 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int		run_fillit(int fd)
 		i = (i == 3) ? 0 : i + 1;
 	}*/
 
-	printf("Solving puzzle... Please wait till year 3000 :D\n");
+	//printf("Solving puzzle... Please wait till year 3000 :D\n");
 	board = ft_strsplit("....|....|....|....", '|');
-	board = solve_fillit(allpieces, board, 5);
-	printf("\nDone! Printing now...\n\n");
+	board = solve_fillit(allpieces, board, 4, 'A');
+	//printf("\nDone! Printing now...\n\n");
 	if (!board)
 		return(0);
 	ft_puttab(board, NULL);
@@ -52,13 +52,13 @@ int				main(int ac, char **av)
 	int		fd;
 
 	if (ac < 2)
-		return (ft_returnmsg("usage: fillit /path/to/file", 2, 1));
+		return (ft_returnmsg("usage: fillit /path/to/file", 1, 0));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		return (ft_returnmsg("fillit: No such file or directory!", 2, 1));
+		return (ft_returnmsg("fillit: No such file or directory!", 1, 1));
 	if (!run_fillit(fd))
-		return (ft_returnmsg("error", 2, 1));
+		return (ft_returnmsg("error", 1, 1));
 	if (close(fd) == -1)
-		return (ft_returnmsg("fillit: Couldn't close the file!", 2, 1));
+		return (ft_returnmsg("fillit: Couldn't close the file!", 1, 1));
 	return (0);
 }

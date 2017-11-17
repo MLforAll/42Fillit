@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/16 17:39:48 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/17 22:03:06 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static int		has_piece_neighbour(char **allpieces, int x, int y)
 	checks[1] = (y < 3 && allpieces[y + 1][x] == '#');
 	checks[2] = (x > 0 && allpieces[y][x - 1] == '#');
 	checks[3] = (x < 3 && allpieces[y][x + 1] == '#');
-	return ((checks[0] || checks[1] || checks[2] || checks[3]));
+	return (checks[0] + checks[1] + checks[2] + checks[3]);
 }
 
 static size_t	count_hashtag_with_neighbour(char **allpieces, int y)
 {
 	int		x;
 	int		ret;
+	int		toadd;
 
 	x = 0;
 	ret = 0;
@@ -34,9 +35,10 @@ static size_t	count_hashtag_with_neighbour(char **allpieces, int y)
 	{
 		if (allpieces[y][x] == '#')
 		{
-			ret++;
-			if (!has_piece_neighbour(allpieces, x, y))
+			toadd = has_piece_neighbour(allpieces, x, y);
+			if (!toadd)
 				return (0);
+			ret += toadd;
 		}
 		x++;
 	}
@@ -78,13 +80,14 @@ size_t			count_pieces(char **allpieces)
 	hashtags = 0;
 	while (allpieces[y])
 	{
-		if (lines == 4 && (ft_strcmp(allpieces[y], "") || hashtags != 4))
+		//printf("ap[y] = %s | hashtags = %i\n", allpieces[y], hashtags);
+		if (lines == 4 && (ft_strcmp(allpieces[y], "") || hashtags <= 4))
 			return (0);
 		else if (lines != 4 && (ft_strlen(allpieces[y]) != 4
 					|| !str_haschars(allpieces[y], "#.")))
 			return (0);
 		hashtags = (lines == 4) ? 0 : hashtags
-			+ count_hashtag_with_neighbour(allpieces, (y - 1) % 4);
+			+ count_hashtag_with_neighbour(allpieces, y);
 		ret += (lines == 4);
 		lines = (lines == 4) ? 0 : lines + 1;
 		y++;

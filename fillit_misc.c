@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   fillit_misc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 15:29:51 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/17 18:38:13 by kdumarai         ###   ########.fr       */
+/*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
+/*   Updated: 2017/11/17 18:36:32 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+int		get_piece_start(char **allpieces)
+{
+	int		x;
+	int		y;
+	int		startx;
+	int		starty;
 
-# include <stdio.h>
-
-# include "Libft/libft.h"
-
-int		get_piece_start(char **allpieces);
-size_t	count_pieces(char **allpieces);
-char	**solve_fillit(char **piece, char **board, int bounds, char letter);
-
-#endif
+	starty = -1;
+	startx = -1;
+	y = 0;
+	while (y < 4)
+	{
+		x = 0;
+		while (x < 4)
+		{
+			if (allpieces[y][x] == '#')
+			{
+				if (x < startx || startx == -1)
+					startx = x;
+				if (starty == -1)
+					starty = y;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (startx * 10 + starty);
+}
