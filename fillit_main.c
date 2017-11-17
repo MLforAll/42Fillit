@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/17 21:26:13 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 00:50:44 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int		run_fillit(int fd)
 	cntpieces = count_pieces(allpieces);
 	if (!cntpieces)
 		return (0);
+	//printf("file valid with cnt = %li\n", cntpieces);
 
 	/*char *test[4] = {".##.", "##..", "....", "...."};
 	int i = 0, p = 0;

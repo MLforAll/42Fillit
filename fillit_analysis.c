@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/17 22:03:06 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 00:38:31 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ static int		has_piece_neighbour(char **allpieces, int x, int y)
 	int		checks[4];
 
 	checks[0] = (y > 0 && allpieces[y - 1][x] == '#');
-	checks[1] = (y < 3 && allpieces[y + 1][x] == '#');
+	checks[1] = (allpieces[y] && allpieces[y + 1][x] == '#');
 	checks[2] = (x > 0 && allpieces[y][x - 1] == '#');
 	checks[3] = (x < 3 && allpieces[y][x + 1] == '#');
+	//printf("x = %i; y = %i | check0 = %i | check1 = %i | check2 = %i | check3 = %i\n", x, y, checks[0], checks[1], checks[2], checks[3]);
 	return (checks[0] + checks[1] + checks[2] + checks[3]);
 }
 
@@ -81,7 +82,7 @@ size_t			count_pieces(char **allpieces)
 	while (allpieces[y])
 	{
 		//printf("ap[y] = %s | hashtags = %i\n", allpieces[y], hashtags);
-		if (lines == 4 && (ft_strcmp(allpieces[y], "") || hashtags <= 4))
+		if (lines == 4 && (ft_strcmp(allpieces[y], "") || hashtags <= 4 || hashtags > 12))
 			return (0);
 		else if (lines != 4 && (ft_strlen(allpieces[y]) != 4
 					|| !str_haschars(allpieces[y], "#.")))

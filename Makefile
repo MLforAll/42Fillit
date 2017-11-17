@@ -6,7 +6,7 @@
 #    By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 20:07:31 by kdumarai          #+#    #+#              #
-#    Updated: 2017/11/17 18:38:06 by kdumarai         ###   ########.fr        #
+#    Updated: 2017/11/18 00:00:47 by kdumarai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	make -C ../Libft
+	make -C libft
 	gcc -c $(SRCS)
-	gcc -o $(NAME) $(OBJS) ../Libft/libft.a
+	gcc -o $(NAME) $(OBJS) libft/libft.a
 
 clean:
 	rm -rf $(OBJS)
