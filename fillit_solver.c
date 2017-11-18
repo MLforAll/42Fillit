@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 19:35:39 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 20:45:02 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ static int	does_it_fit(char **piece, char **board, int x, int y)
 		x = bakx;
 		while (board[y][x])
 		{
-			if (board[y][x] != '.' && piece[sy][sx] == '#')
-				return (0);
-			hashtags += (piece[sy][sx] == '#');
+			hashtags += (board[y][x] == '.' && piece[sy][sx] == '#');
 			sx += (sx < 4);
 			x++;
 		}
@@ -137,14 +135,15 @@ char		**solve_fillit(char **piece, char **board, int bounds, char letter)
 					pos[0] = x;
 					pos[1] = y;
 					add_piece(piece, board, pos, letter);
-					solve_fillit(piece + 5, board, bounds, letter + 1);
+					if (solve_fillit(piece + 5, board, bounds, letter + 1))
+						return (board);
 					del_piece(board, letter);
 				}
 			}
 		}
 		if (letter > 'A')
 			return (NULL);
-		if (!remalloc_board(&board, bounds++))
+		if (!remalloc_board(&board, ++bounds))
 			break ;
 	}
 	return (NULL);
