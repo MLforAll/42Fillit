@@ -6,37 +6,30 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/17 20:55:05 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 16:59:22 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-/*void	del_piece(char **piece, char **board, int pos[2], char letter)
+void	del_piece(char **board, char letter)
 {
-	int		startpoint;
-	int		sx;
-	int		sy;
-	int		bakx;
+	int		x;
+	int		y;
 
-	startpoint = get_piece_start(piece);
-	sy = startpoint % 10;
-	bakx = pos[0];
-	while (board[pos[1]])
+	y = 0;
+	while (board[y])
 	{
-		sx = (startpoint < 0) ? 0 : startpoint / 10;
-		pos[0] = bakx;
-		while (board[pos[1]][pos[0]])
+		x = 0;
+		while (board[y][x])
 		{
-			if (piece[sy][sx] == letter)
-				board[pos[1]][pos[0]] = '.';
-			sx += (pos[0] < 3);
-			pos[0]++;
+			if (board[y][x] == letter)
+				board[y][x] = '.';
+			x++;
 		}
-		sy += (pos[1] < 3);
-		pos[1]++;
+		y++;
 	}
-}*/
+}
 
 void	add_piece(char **piece, char **board, int pos[2], char letter)
 {
@@ -50,7 +43,7 @@ void	add_piece(char **piece, char **board, int pos[2], char letter)
 	bakx = pos[0];
 	while (board[pos[1]])
 	{
-		sx = (startpoint < 0) ? 0 : startpoint / 10;
+		sx = (startpoint < 10) ? 0 : startpoint / 10;
 		pos[0] = bakx;
 		while (board[pos[1]][pos[0]])
 		{
@@ -78,7 +71,7 @@ int		does_it_fit(char **piece, char **board, int pos[2], int bounds)
 	bakx = pos[0];
 	while (pos[1] < bounds)
 	{
-		sx = (startpoint < 0) ? 0 : startpoint / 10;
+		sx = (startpoint < 10) ? 0 : startpoint / 10;
 		pos[0] = bakx;
 		while (pos[0] < bounds)
 		{
@@ -151,12 +144,17 @@ char	**solve_fillit(char **piece, char **board, int bounds, char letter)
 					add_piece(piece, board, pos, letter);
 					//printf("added!  (x = %i; y = %i)\n\n", x, y);
 					//ft_puttab(board, NULL);
-					return (solve_fillit(piece + 5, board, bounds, letter + 1)); /* 4 elems per piece + 1 blank (\n) */
-					//printf("delete! (x = %i; y = %i)\n", x, y);
-					//del_piece(piece, board, pos, letter);
+					if (solve_fillit(piece + 5, board, bounds, letter + 1)) /* 4 elems per piece + 1 blank (\n) */
+						return (board);
+					//printf("\ndelete! (x = %i; y = %i; letter = %c)\n", x, y, letter);
+					del_piece(board, letter);
+					//printf("del ok! (x = %i; y = %i; letter = %c)\n", x, y, letter);
+					//ft_puttab(board, NULL);
 				}
 			}
 		}
+		if (letter > 'A')
+			return (NULL);
 		/* Remalloc */
 		//printf("=== REMALLOC ===\n");
 		bounds++;

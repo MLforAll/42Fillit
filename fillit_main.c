@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 00:50:44 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 17:24:37 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int		run_fillit(int fd)
 	}*/
 
 	//printf("Solving puzzle... Please wait till year 3000 :D\n");
-	board = ft_strsplit("....|....|....|....", '|');
-	board = solve_fillit(allpieces, board, 4, 'A');
+	board = ft_strsplit("..|..", '|');
+	board = solve_fillit(allpieces, board, 2, 'A');
 	//printf("\nDone! Printing now...\n\n");
 	if (!board)
 		return(0);
