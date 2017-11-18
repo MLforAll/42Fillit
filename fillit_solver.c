@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 20:45:02 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 22:45:00 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ static int			remalloc_board(char ***board, int bounds)
 	return (1);
 }
 
-char		**solve_fillit(char **piece, char **board, int bounds, char letter)
+int		solve_fillit(char **piece, char ***board, int bounds, char letter)
 {
 	int		x;
 	int		y;
 	int		pos[2];
 
 	if (!*piece)
-		return (board);
+		return (1);
 	while (bounds < 104)
 	{
 		y = -1;
@@ -130,21 +130,21 @@ char		**solve_fillit(char **piece, char **board, int bounds, char letter)
 			x = -1;
 			while (++x < bounds)
 			{
-				if (does_it_fit(piece, board, x, y))
+				if (does_it_fit(piece, *board, x, y))
 				{
 					pos[0] = x;
 					pos[1] = y;
-					add_piece(piece, board, pos, letter);
+					add_piece(piece, *board, pos, letter);
 					if (solve_fillit(piece + 5, board, bounds, letter + 1))
-						return (board);
-					del_piece(board, letter);
+						return (1);
+					del_piece(*board, letter);
 				}
 			}
 		}
 		if (letter > 'A')
-			return (NULL);
-		if (!remalloc_board(&board, ++bounds))
+			return (0);
+		if (!remalloc_board(board, ++bounds))
 			break ;
 	}
-	return (NULL);
+	return (0);
 }

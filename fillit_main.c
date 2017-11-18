@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 20:42:55 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 22:45:06 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static int		fillit_solve(int fd)
 	if (!is_file_valid(allpieces))
 		return (0);
 	board = ft_strsplit("..|..", '|');
-	board = solve_fillit(allpieces, board, 2, 'A');
-	if (!board)
+	if (!solve_fillit(allpieces, &board, 2, 'A'))
 		return (0);
 	ft_puttab(board, NULL);
 	ft_tabfree(&board);

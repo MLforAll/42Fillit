@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 15:29:51 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 19:04:59 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 22:45:42 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int		is_file_valid(char **allpieces);
 
 /* solver */
-char	**solve_fillit(char **piece, char **board, int bounds, char letter);
+int		solve_fillit(char **piece, char ***board, int bounds, char letter);
 
 /* misc */
 int		get_piece_start(char **allpieces);
