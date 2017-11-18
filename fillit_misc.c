@@ -6,9 +6,11 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/17 18:36:32 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 18:10:41 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 int		get_piece_start(char **allpieces)
 {
@@ -37,4 +39,26 @@ int		get_piece_start(char **allpieces)
 		y++;
 	}
 	return (startx * 10 + starty);
+}
+
+int		str_haschars(const char *str, const char *chars)
+{
+	int		fails;
+	int		ci;
+
+	while (*str)
+	{
+		fails = 0;
+		ci = 0;
+		while (chars[ci])
+		{
+			if (*str != chars[ci])
+				fails++;
+			ci++;
+		}
+		if (fails == 2)
+			return (0);
+		str++;
+	}
+	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 15:46:46 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/18 18:10:01 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		has_piece_neighbour(char **allpieces, int x, int y)
+static int	cnt_square_neighbours(char **allpieces, int x, int y)
 {
 	int		checks[4];
 
@@ -23,7 +23,7 @@ static int		has_piece_neighbour(char **allpieces, int x, int y)
 	return (checks[0] + checks[1] + checks[2] + checks[3]);
 }
 
-static size_t	count_hashtag_with_neighbour(char **allpieces, int y)
+static int	cnt_line_neighbours(char **allpieces, int y)
 {
 	int		x;
 	int		ret;
@@ -35,7 +35,7 @@ static size_t	count_hashtag_with_neighbour(char **allpieces, int y)
 	{
 		if (allpieces[y][x] == '#')
 		{
-			toadd = has_piece_neighbour(allpieces, x, y);
+			toadd = cnt_square_neighbours(allpieces, x, y);
 			if (!toadd)
 				return (0);
 			ret += toadd;
@@ -45,51 +45,30 @@ static size_t	count_hashtag_with_neighbour(char **allpieces, int y)
 	return (ret);
 }
 
-static	int		str_haschars(const char *str, const char *chars)
+int			is_file_valid(char **allpieces)
 {
-	size_t	fails;
-	size_t	ci;
+	int		ret;
+	int		y;
+	int		line;
+	int		line_neighbours;
 
-	while (*str)
-	{
-		fails = 0;
-		ci = 0;
-		while (chars[ci])
-		{
-			if (*str != chars[ci])
-				fails++;
-			ci++;
-		}
-		if (fails == 2)
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-size_t			count_pieces(char **allpieces)
-{
-	unsigned int	y;
-	size_t			ret;
-	int				lines;
-	int				hashtags;
-
-	y = 0;
 	ret = 0;
-	lines = 0;
-	hashtags = 0;
+	y = 0;
+	line = 0;
+	line_neighbours = 0;
 	while (allpieces[y])
 	{
-		if (lines == 4 && (ft_strcmp(allpieces[y], "") || hashtags <= 4 || hashtags > 12))
+		if (line == 4 && (ft_strcmp(allpieces[y], "")
+			|| line_neighbours <= 4 || line_neighbours > 12))
 			return (0);
-		else if (lines != 4 && (ft_strlen(allpieces[y]) != 4
+		else if (line != 4 && (ft_strlen(allpieces[y]) != 4
 					|| !str_haschars(allpieces[y], "#.")))
 			return (0);
-		hashtags = (lines == 4) ? 0 : hashtags
-			+ count_hashtag_with_neighbour(allpieces, y);
-		ret += (lines == 4);
-		lines = (lines == 4) ? 0 : lines + 1;
+		line_neighbours = (line == 4) ? 0 : line_neighbours
+			+ cnt_line_neighbours(allpieces, y);
+		ret += (line == 4);
+		line = (line == 4) ? 0 : line + 1;
 		y++;
 	}
-	return (ret);
+	return ((ret != 0));
 }
