@@ -6,12 +6,13 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/20 13:27:33 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/20 15:11:18 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <fcntl.h>
+#include <unistd.h>
 
 static int		fillit_usage(char *prgm_name, char *target_file_msg, int retval)
 {

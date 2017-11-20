@@ -6,11 +6,12 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/20 13:19:03 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/20 15:20:46 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdlib.h>
 
 int		get_piece_start(char **allpieces)
 {
@@ -70,6 +71,8 @@ int		get_min_size(int n_pieces)
 
 	bounds = 2;
 	i = 1;
+	if (n_pieces == 26)
+		return (12);
 	while (i++ < n_pieces)
 	{
 		if (i % 4 == 0)
