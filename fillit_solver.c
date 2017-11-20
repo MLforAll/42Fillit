@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 22:45:00 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:28:09 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,32 +85,25 @@ static int	does_it_fit(char **piece, char **board, int x, int y)
 	return ((hashtags >= 4));
 }
 
-static int			remalloc_board(char ***board, int bounds)
+int		malloc_board_size(char ***board, int bounds)
 {
 	char	**tmp;
-	char	*strtmp;
-	char	**newrow;
-	int		i;
+	char	**newboard;
+	int		i = 0;
 
-	i = 0;
-	if (!(newrow = (char**)ft_memalloc(sizeof(char*) * 2)))
-		return (0);
-	if (!(newrow[0] = ft_strnew(bounds)))
+	if (!(newboard = (char**)ft_memalloc(sizeof(char*) * (bounds + 1))))
 		return (0);
 	while (i < bounds)
-		newrow[0][i++] = '.';
-	tmp = *board;
-	*board = ft_tabcat((const char**)tmp, (const char**)newrow);
-	ft_tabfree(&tmp);
-	ft_tabfree(&newrow);
-	i = 0;
-	while (i < bounds - 1)
 	{
-		strtmp = (*board)[i];
-		(*board)[i] = ft_strjoin((*board)[i], ".");
-		ft_strdel(&strtmp);
+		if (!(newboard[i] = strnewc(bounds, '.')))
+			return (0);
 		i++;
 	}
+	newboard[i] = NULL;
+	tmp = *board;
+	*board = newboard;
+	if (tmp)
+		ft_tabfree(&tmp);
 	return (1);
 }
 
@@ -143,7 +136,7 @@ int		solve_fillit(char **piece, char ***board, int bounds, char letter)
 		}
 		if (letter > 'A')
 			return (0);
-		if (!remalloc_board(board, ++bounds))
+		if (!malloc_board_size(board, ++bounds))
 			break ;
 	}
 	return (0);

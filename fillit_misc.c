@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 18:10:41 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:19:03 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,33 @@ int		str_haschars(const char *str, const char *chars)
 		str++;
 	}
 	return (1);
+}
+
+int		get_min_size(int n_pieces)
+{
+	int		bounds;
+	int		i;
+
+	bounds = 2;
+	i = 1;
+	while (i++ < n_pieces)
+	{
+		if (i % 4 == 0)
+			bounds += 2;
+	}
+	return (bounds);
+}
+
+char	*strnewc(int size, char c)
+{
+	int		i;
+	char	*ret;
+
+	i = 0;
+	if (!(ret =(char*)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	while (i < size)
+		ret[i++] = c;
+	ret[i] = '\0';
+	return (ret);
 }

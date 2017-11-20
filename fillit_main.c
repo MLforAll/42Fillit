@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 22:45:06 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:27:33 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,19 @@ static int		fillit_solve(int fd)
 	char	*file_content;
 	char	**allpieces;
 	char	**board;
+	int		n_pieces;
+	int		min_bsize;
 
 	file_content = ft_readfd(fd, 32);
 	allpieces = ft_strsplitline(file_content);
 	ft_strdel(&file_content);
-	if (!is_file_valid(allpieces))
+	n_pieces = is_file_valid(allpieces);
+	if (n_pieces <= 0 || n_pieces > 26)
 		return (0);
-	board = ft_strsplit("..|..", '|');
-	if (!solve_fillit(allpieces, &board, 2, 'A'))
+	min_bsize = get_min_size(n_pieces);
+	board = NULL;
+	malloc_board_size(&board, min_bsize);
+	if (!solve_fillit(allpieces, &board, min_bsize, 'A'))
 		return (0);
 	ft_puttab(board, NULL);
 	ft_tabfree(&board);
@@ -62,10 +67,10 @@ int				main(int ac, char **av)
 	if (ac < 2)
 		return (fillit_usage(prgm_name, "target_file", 0));
 	if ((fd = open(av[1], O_RDONLY)) == -1)
-		return (fillit_err(prgm_name, "No such file or directory!", 1, 1));
+		return (fillit_err(NULL, "error", 1, 1));
 	if (!fillit_solve(fd))
 		return (fillit_err(NULL, "error", 1, 1));
 	if (close(fd) == -1)
-		return (fillit_err(prgm_name, "Couldn't close the file!", 1, 1));
+		return (fillit_err(NULL, "error", 1, 1));
 	return (0);
 }

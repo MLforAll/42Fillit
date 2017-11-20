@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/18 22:43:56 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:28:44 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int			is_file_valid(char **allpieces)
 		line = (line == 4) ? 0 : line + 1;
 		y++;
 	}
-	return ((ret != 0));
+	return (ret);
 }
