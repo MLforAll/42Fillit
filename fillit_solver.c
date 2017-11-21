@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/20 14:30:38 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/21 23:17:51 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,30 @@ static void	del_piece(char **board, char letter)
 	}
 }
 
-static void	add_piece(char **piece, char **board, int pos[2], char letter)
+static void	add_piece(char **piece, char **board, int board_sp, char letter)
 {
-	int		startpoint;
-	int		sx;
+	int		piece_sp;
 	int		sy;
-	int		bakx;
+	int		sx;
+	int		y;
+	int		x;
 
-	startpoint = get_piece_start(piece);
-	sy = startpoint % 10;
-	bakx = pos[0];
-	while (board[pos[1]])
+	piece_sp = get_piece_start(piece);
+	sy = piece_sp % 10;
+	y = board_sp % 10;
+	while (board[y])
 	{
-		sx = (startpoint < 10) ? 0 : startpoint / 10;
-		pos[0] = bakx;
-		while (board[pos[1]][pos[0]])
+		sx = (piece_sp < 10) ? 0 : piece_sp / 10;
+		x = (board_sp < 10) ? 0 : board_sp / 10;
+		while (board[y][x])
 		{
 			if (piece[sy][sx] == '#')
-				board[pos[1]][pos[0]] = letter;
+				board[y][x] = letter;
 			sx += (sx < 4);
-			pos[0]++;
+			x++;
 		}
 		sy += (sy < 4);
-		pos[1]++;
+		y++;
 	}
 }
 
@@ -85,7 +86,7 @@ static int	does_it_fit(char **piece, char **board, int x, int y)
 	return ((hashtags >= 4));
 }
 
-int		malloc_board_size(char ***board, int bounds)
+int			malloc_board_size(char ***board, int bounds)
 {
 	char	**tmp;
 	char	**newboard;
@@ -107,15 +108,12 @@ int		malloc_board_size(char ***board, int bounds)
 	return (1);
 }
 
-int		solve_fillit(char **piece, char ***board, int bounds, char letter)
+int			solve_fillit(char **piece, char ***board, int bounds, char letter)
 {
 	int		x;
 	int		y;
-	int		pos[2];
 
-	if (!*piece)
-		return (1);
-	while (bounds < 104)
+	while (bounds < 15)
 	{
 		y = -1;
 		while (++y < bounds)
@@ -125,19 +123,15 @@ int		solve_fillit(char **piece, char ***board, int bounds, char letter)
 			{
 				if (does_it_fit(piece, *board, x, y))
 				{
-					pos[0] = x;
-					pos[1] = y;
-					add_piece(piece, *board, pos, letter);
-					if (solve_fillit(piece + 5, board, bounds, letter + 1))
+					add_piece(piece, *board, x * 10 + y, letter);
+					if (!*(piece + 5) || solve_fillit(piece + 5, board, bounds, letter + 1))
 						return (1);
 					del_piece(*board, letter);
 				}
 			}
 		}
-		if (letter > 'A')
+		if (letter > 'A' || !malloc_board_size(board, ++bounds))
 			return (0);
-		if (!malloc_board_size(board, ++bounds))
-			break ;
 	}
 	return (0);
 }
