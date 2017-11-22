@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/20 15:20:46 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/22 16:19:56 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*strnewc(int size, char c)
 	char	*ret;
 
 	i = 0;
-	if (!(ret =(char*)malloc(sizeof(char) * (size + 1))))
+	if (!(ret = (char*)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	while (i < size)
 		ret[i++] = c;

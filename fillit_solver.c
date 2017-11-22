@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/21 23:17:51 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/22 16:19:34 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ int			malloc_board_size(char ***board, int bounds)
 {
 	char	**tmp;
 	char	**newboard;
-	int		i = 0;
+	int		i;
 
+	i = 0;
 	if (!(newboard = (char**)ft_memalloc(sizeof(char*) * (bounds + 1))))
 		return (0);
 	while (i < bounds)
@@ -124,7 +125,8 @@ int			solve_fillit(char **piece, char ***board, int bounds, char letter)
 				if (does_it_fit(piece, *board, x, y))
 				{
 					add_piece(piece, *board, x * 10 + y, letter);
-					if (!*(piece + 5) || solve_fillit(piece + 5, board, bounds, letter + 1))
+					if (!*(piece + 5)
+						|| solve_fillit(piece + 5, board, bounds, letter + 1))
 						return (1);
 					del_piece(*board, letter);
 				}
