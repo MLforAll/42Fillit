@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/22 16:19:56 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/30 20:25:00 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		get_min_size(int n_pieces)
 	while (i++ < n_pieces)
 	{
 		if (i % 4 == 0)
-			bounds += 2;
+			bounds++;
 	}
 	return (bounds);
 }

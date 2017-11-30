@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/20 15:11:18 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/30 20:25:48 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int		fillit_solve(int fd)
 		return (0);
 	min_bsize = get_min_size(n_pieces);
 	board = NULL;
-	malloc_board_size(&board, min_bsize);
+	if (!malloc_board_size(&board, min_bsize))
+		return (0);
 	if (!solve_fillit(allpieces, &board, min_bsize, 'A'))
 		return (0);
 	ft_puttab(board, NULL);

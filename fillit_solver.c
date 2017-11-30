@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:01:59 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/22 16:19:34 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/11/30 20:26:12 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int			malloc_board_size(char ***board, int bounds)
 			return (0);
 		i++;
 	}
-	newboard[i] = NULL;
 	tmp = *board;
 	*board = newboard;
 	if (tmp)
