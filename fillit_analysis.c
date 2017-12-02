@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:36:34 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/20 13:28:44 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/12/02 14:49:04 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	cnt_square_neighbours(char **allpieces, int x, int y)
 	int		checks[4];
 
 	checks[0] = (y > 0 && allpieces[y - 1][x] == '#');
-	checks[1] = (allpieces[y] && allpieces[y + 1][x] == '#');
+	checks[1] = (allpieces[y + 1] && allpieces[y + 1][x] == '#');
 	checks[2] = (x > 0 && allpieces[y][x - 1] == '#');
 	checks[3] = (x < 3 && allpieces[y][x + 1] == '#');
 	return (checks[0] + checks[1] + checks[2] + checks[3]);
@@ -53,10 +53,10 @@ int			is_file_valid(char **allpieces)
 	int		line_neighbours;
 
 	ret = 0;
-	y = 0;
+	y = -1;
 	line = 0;
 	line_neighbours = 0;
-	while (allpieces[y])
+	while (allpieces[++y])
 	{
 		if (line == 4 && (ft_strcmp(allpieces[y], "")
 			|| line_neighbours <= 4 || line_neighbours > 12))
@@ -68,7 +68,8 @@ int			is_file_valid(char **allpieces)
 			+ cnt_line_neighbours(allpieces, y);
 		ret += (line == 4);
 		line = (line == 4) ? 0 : line + 1;
-		y++;
 	}
+	if (line)
+		return (0);
 	return (ret);
 }

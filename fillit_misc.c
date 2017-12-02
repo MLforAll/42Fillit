@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/11/30 20:25:00 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/12/02 15:41:22 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,8 @@ int		get_min_size(int n_pieces)
 
 	bounds = 2;
 	i = 1;
-	if (n_pieces == 26)
-		return (12);
 	while (i++ < n_pieces)
-	{
-		if (i % 4 == 0)
-			bounds++;
-	}
+		bounds += (i % 4 == 0);
 	return (bounds);
 }
 
