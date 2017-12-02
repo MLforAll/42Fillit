@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:34:02 by kdumarai          #+#    #+#             */
-/*   Updated: 2017/12/02 15:41:22 by kdumarai         ###   ########.fr       */
+/*   Updated: 2017/12/02 20:06:38 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		get_piece_start(char **allpieces)
 	return (startx * 10 + starty);
 }
 
-int		str_haschars(const char *str, const char *chars)
+int		strchrs(const char *str, const char *chars)
 {
 	int		fails;
 	int		ci;
@@ -87,5 +87,16 @@ char	*strnewc(int size, char c)
 	while (i < size)
 		ret[i++] = c;
 	ret[i] = '\0';
+	return (ret);
+}
+
+int		cnt_char(char *str, char c)
+{
+	int		ret;
+
+	ret = 0;
+	while (*str)
+		if (*(str++) == c)
+			ret++;
 	return (ret);
 }
