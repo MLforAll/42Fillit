@@ -6,7 +6,7 @@
 #    By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 19:26:06 by kdumarai          #+#    #+#              #
-#    Updated: 2017/11/24 16:32:18 by kdumarai         ###   ########.fr        #
+#    Updated: 2018/04/25 13:50:21 by kdumarai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,18 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) fillit.h
-	make -C Libft
-	gcc -o $(NAME) $(OBJS) -L Libft -lft
+	make -C libft
+	gcc -o $(NAME) $(OBJS) -L libft -lft
 
 %.o: %.c
-	gcc $(CFLAGS) -c $<
+	gcc $(CFLAGS) -I . -I libft/includes -c $<
 
 clean:
-	make clean -C Libft
+	make clean -C libft
 	rm -f $(OBJS)
 
 fclean: clean
-	make fclean -C Libft
+	make fclean -C libft
 	rm -f $(NAME)
 
 re: fclean all
