@@ -6,7 +6,7 @@
 /*   By: kdumarai <kdumarai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 15:29:51 by kdumarai          #+#    #+#             */
-/*   Updated: 2018/04/25 13:49:57 by kdumarai         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:37:14 by kdumarai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int		strchrs(const char *str, const char *chars);
 int		get_min_size(int n_pieces);
 char	*strnewc(int size, char c);
 int		cnt_char(char *str, char c);
+
+char	**ft_strsplitline(const char *s);
 
 #endif
